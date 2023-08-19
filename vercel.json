@@ -1,13 +1,27 @@
 {
 "builds": [{
     "src": "facerecognition/wsgi.py",
-    "use": "@vercel/python",
-    "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-}],
+    "use": "@vercel/python"
+   
+},
+{
+    "src":"build.sh",
+    "use": "@vercel/static-build",
+    "config":{
+        "distDir":"staticfiles"
+    }
+}
+]
+,
 "routes": [
     {
         "src": "/(.*)",
         "dest": "facerecognition/wsgi.py"
+    },
+
+    {
+        "src":"/static/(.*)",
+        "dest": "/static/&1"
     }
 ]
 }

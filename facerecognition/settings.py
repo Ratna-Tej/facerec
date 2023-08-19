@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'facerecognition.wsgi.application'
+WSGI_APPLICATION = 'facerecognition.wsgi.app'
 
 
 # Database
@@ -122,7 +122,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS=[
     STATIC_DIR,
 ]
-STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+#STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 #media
 MEDIA_ROOT=MEDIA_DIR
 MEDIA_URL='/media/'
@@ -130,3 +130,9 @@ MEDIA_URL='/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if os.environ.get('VERCEL'):
+    STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+    STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
+    
+    
